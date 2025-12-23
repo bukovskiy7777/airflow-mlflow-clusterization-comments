@@ -1,0 +1,41 @@
+predict:
+  SEED: 10
+  comments:
+    YOUTUBE_API_KEY: AIzaSyDDZaDiAIPPgo7PQdKFNuLcHmhbd17r658
+    count_video: 30
+    limit: 30
+    maxResults: 100
+    nextPageToken: ''
+    query: психология
+  dir_folder: /home/oleksandr/apps/airflow-local
+  model_lr: LogisticRegression
+  model_vec: vector_tfidf
+  name_file: data/text.csv
+  num_top: 10
+  stopwords: russian
+  version_lr: 11
+  version_vec: 11
+train:
+  SEED: 10
+  clustering:
+    affinity: cosine
+    count_max_clusters: 10
+    silhouette_metric: euclidean
+  comments:
+    YOUTUBE_API_KEY: AIzaSyDDZaDiAIPPgo7PQdKFNuLcHmhbd17r658
+    count_video: 50
+    limit: 50
+    maxResults: 250
+    nextPageToken: ''
+    query: психология
+  cross_val:
+    test_size: 0.3
+  dir_folder: /home/oleksandr/apps/airflow-local
+  model:
+    class_weight: balanced
+  model_lr: LogisticRegression
+  model_vec: vector_tfidf
+  name_experiment: psycology_comments_clustering_v4
+  stopwords: russian
+  tf_model:
+    max_features: 300

@@ -1,0 +1,4 @@
+mlflow/**
+airflow_env/**
+**/__pycache__/**
+**:Zone.Identifier
