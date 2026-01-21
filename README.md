@@ -37,7 +37,6 @@ The standard hierarchical structure ensures modularity and clean code separation
 └── train.py                  # Model training script
 ```
 
-
 ## Technologies Used
 
 | Category | Tool/Library | Purpose |
@@ -65,3 +64,20 @@ The standard hierarchical structure ensures modularity and clean code separation
     *   The latest model versions are loaded from MLflow.
     *   New comments are classified.
     *   The top 10 keywords for each identified topic are saved to `data/text.csv`.
+
+## Results Interpretation: Identified Topics
+
+The script processed YouTube comments (using "психология" as the query) and identified 9 distinct topics. The following table presents the top 10 keywords characterizing each theme, providing insight into the community's primary areas of interest. The topics are organized in columns as they appear in the output CSV file.
+
+| Topic ID | Top Keywords | Interpretation |
+| :--- | :--- | :--- |
+| **0** | человек, власть, самый, гнилой, делать, жизнь, любовь, понимать, любить, бояться | **Core Human Concepts & Challenges**. This topic groups general philosophical and human existence terms ("human", "life", "love") mixed with concepts of power, criticism ("rotten"), and fear. It seems to represent a high-level, foundational theme about the human experience. **Основные понятия человеческого существования: жизнь, любовь, власть и страхи.** |
+| **1** | видео, психолог, психология, канал, лекция, автор, глаз, тема, понимать, давно | **Content Consumption & Expert Analysis**. This theme focuses heavily on how users consume the content: videos, lectures, podcasts, and the role of the psychologist/author. It represents the active engagement with the media itself. **Обсуждение формата контента (видео, лекции) и роли автора/психолога.** |
+| **2** | заботиться, лекция, лицо, любить, любовь, любой, мало, мальчик, мама, идея | **Emotional & Relational Dynamics**. This topic touches upon personal emotions and relationships, particularly family ("mama", "boy", "care", "love"). It suggests discussions around emotional well-being and personal connections. **Личные отношения, эмоции и семейные темы, включая заботу и любовь.** |
+| **3** | благодарить, ролик, прекрасный, деньги, увидеть, работа, душа, информация, видео, слово | **Value Exchange & Information Utility**. This theme mixes expressions of gratitude ("thank") with the perceived value of the information ("useful information"), discussions about work, and potentially the financial aspects ("money") of expert advice. **Благодарность за полезную информацию, обсуждение работы и ценности контента.** |
+| **4** | год, бабушка, любить, ребенок, мама, жизнь, детство, понимать, становиться, суп | **Generational & Life Stages**. This topic clearly groups terms related to time, age, family, and life stages ("grandmother", "child", "mother", "childhood", "year"). It likely covers content related to family dynamics and growing up. **Темы, связанные с возрастом, семьей, детством и жизненными этапами.** |
+| **5** | спасибо, большой, подкаст, огромный, видео, жизнь, гость, полезный, тема, совет | **Feedback, Format, & Utility**. A strong theme of positive feedback ("thank you", "great") combined with specific content formats ("podcast", "guest") and the practical utility of the advice given ("useful", "advice"). **Положительные отзывы, обсуждение подкастов/гостей и практической пользы советов.** |
+| **6** | слушать, книга, прямой, читать, приятно, психология, интересно, брать, минута, начинать | **Learning Process & Engagement**. This topic focuses on the active steps users take to learn: listening, reading books, "starting" a process, and finding content interesting or pleasant. **Процесс обучения через прослушивание/чтение, начало новых практик.** |
+| **7** | женщина, мужик, мужчина, ребенок, особенно, готовить, делать, деньги, далеко, манипуляция | **Gender Roles, Action, & Criticism**. This theme seems to be more action-oriented ("do", "prepare") but also includes specific gender references ("woman", "man") and potentially darker or critical concepts like "money" and "manipulation". **Обсуждение гендерных ролей, действий и критические замечания (деньги, манипуляции).** |
+| **8** | бог, мир, твой, самый, правда, слово, любовь, решать, посмотреть, взять | **Existential & Conclusive Concepts**. This final topic is highly abstract and conclusive: discussing "God", the "world", "truth", "love", and "solving" issues. It suggests a focus on existential themes or summarizing outcomes. **Экзистенциальные темы: поиск истины, мира, любви и решения проблем.** |
+
