@@ -81,3 +81,52 @@ The script processed YouTube comments (using "психология" as the query
 | **7** | женщина, мужик, мужчина, ребенок, особенно, готовить, делать, деньги, далеко, манипуляция | **Gender Roles, Action, & Criticism**. This theme seems to be more action-oriented ("do", "prepare") but also includes specific gender references ("woman", "man") and potentially darker or critical concepts like "money" and "manipulation". **Обсуждение гендерных ролей, действий и критические замечания (деньги, манипуляции).** |
 | **8** | бог, мир, твой, самый, правда, слово, любовь, решать, посмотреть, взять | **Existential & Conclusive Concepts**. This final topic is highly abstract and conclusive: discussing "God", the "world", "truth", "love", and "solving" issues. It suggests a focus on existential themes or summarizing outcomes. **Экзистенциальные темы: поиск истины, мира, любви и решения проблем.** |
 
+
+## 🧠 Deep Dive: ML Logic & Mathematical Base
+The data processing workflow is divided into three key stages: text-to-numerical transformation, discovery of latent structures (clustering), and predictive model training.
+
+**1. Vectorization: TF-IDF Transformation**
+
+To enable algorithms to process text, we convert it into a vector space using TF-IDF (Term Frequency-Inverse Document Frequency).
+* **Term Frequency (TF)**: Evaluates the importance of a word within a single comment.
+* **Inverse Document Frequency (IDF)**: Reduces the weight of words that appear frequently across all comments (e.g., common stop words), highlighting terms specific to particular topics.
+
+**Mathematical Base**:The weight of term $t$ in document $d$ is calculated as:
+
+$$w_{t,d} = \text{tf}_{t,d} \times \log\left(\frac{N}{\text{df}_t}\right)$$
+  
+where $N$ is the total number of comments, and $\text{df}_t$ is the number of documents containing term $t$. This results in a sparse matrix where each comment is represented by a vector of significant features.
+  
+**2. Topic Discovery: Spectral Clustering & Silhouette Score**
+
+Unlike traditional K-Means, **Spectral Clustering** utilizes the eigenvalues of similarity matrices to perform dimensionality reduction before clustering.
+
+* **Why Spectral Clustering?** It excels at handling data where cluster boundaries have complex shapes, which is typical for natural language semantics.
+
+* **Automated Topic Detection**: The number of topics is not set manually. Instead, the script iterates through a range of values and evaluates each using the **Silhouette Score**.
+
+**Mathematical Base (Silhouette Score)**: For each object, the coefficient is calculated as:
+
+$$s = \frac{b - a}{\max(a, b)}$$
+
+Where:
+* $a$ is the mean distance to objects within the same cluster.
+* $b$ is the mean distance to objects in the nearest neighboring cluster.The value $s$ ranges from $[-1, 1]$. The script selects the number of clusters that maximizes the mean silhouette score across the entire dataset.
+
+**3. Classification: Logistic Regression**
+
+Once clustering has assigned a topic ID (Label) to each comment, we train a **Logistic Regression** classifier to predict these labels.
+* **Why this step?** Clustering is computationally expensive. A trained classification model (Inference) operates almost instantaneously, allowing for the classification of new comments without recalculating the similarity matrix for the entire dataset.
+* **Logic**: The model constructs separating hyperplanes in the high-dimensional TF-IDF feature space.
+
+**Mathematical Base**: For multi-class classification, the **Softmax** function is used to transform model outputs into probabilities for each topic:
+
+$$P(y=i | x) = \frac{e^{z_i}}{\sum_{j=1}^{K} e^{z_j}}$$
+
+where $z_i$ is the linear combination of features for class $i$. The model minimizes the Cross-Entropy loss function to ensure the highest possible prediction accuracy.
+
+## 📈 Metrics and Quality Control
+
+During the training process, the following indicators are logged in **MLflow**:
+* **Precision (Macro)**: Measures how accurately the model identifies a topic (minimizing false positives).
+* **F1-Score (Macro)**: The harmonic mean of Precision and Recall, accounting for potential imbalances in the number of comments across different topics.
